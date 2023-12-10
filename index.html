@@ -18,6 +18,7 @@
     <button class="numberButton">7</button>
     <button class="numberButton">8</button>
     <button class="numberButton">9</button>
+    <button class="decimalButton">.</button>
     <button class="operationSymbol">+</button>
     <button class="operationSymbol">-</button>
     <button class="operationSymbol">*</button>
@@ -28,14 +29,16 @@
     <div class="resultDisplay"></div>
     
 
-
+    
 
     <script>
         let numberOneString = "";
         let numberTwoString;
         let operationSymbol;
+        let decimalSymboltrigger = false;
         let resultDisplay = document.querySelector(".resultDisplay");
         let numberButtons = document.querySelectorAll(".numberButton");
+        let decimalButton = document.querySelector(".decimalButton");
         let operation = document.querySelectorAll(".operationSymbol");
         let equals = document.querySelector('.equals');
         let clearButton = document.querySelector('.clearButton');
@@ -55,6 +58,7 @@
                     console.log(numberOneString);
                     resultDisplay.textContent += " " + button.textContent + " ";
                     operationSymbol = button.textContent;
+                    decimalSymboltrigger = false
                 }
                
             });
@@ -64,21 +68,46 @@
             numberTwoString = resultDisplay.textContent.slice(numberOneString.length + 3);
             console.log(numberTwoString);
             //console.log(operate(operationSymbol, parseInt(numberOneString), parseInt(numberTwoString)));
-            resultDisplay.textContent = operate(operationSymbol, parseInt(numberOneString), parseInt(numberTwoString));
+            resultDisplay.textContent = operate(operationSymbol, parseFloat(numberOneString), parseFloat(numberTwoString));
             operationSymbol = undefined;
+            decimalSymboltrigger = false
         });
 
         clearButton.addEventListener('click', () => {
             resultDisplay.textContent = "";
             operationSymbol = undefined;
+            decimalSymboltrigger = false
         });
 
         undoButton.addEventListener('click', () => {
-            if(resultDisplay.textContent.slice(0, -1) === " "){
-                resultDisplay.textContent = resultDisplay.textContent.slice(0, -3);    
+            // if(resultDisplay.textContent.slice(0, -1) === " "){
+            //     resultDisplay.textContent = resultDisplay.textContent.slice(0, -3);    
+            // }
+            // else{
+            //     resultDisplay.textContent = resultDisplay.textContent.slice(0, -1);
+            // }
+            
+
+            switch(resultDisplay.textContent.slice(-1)){
+                case " ":
+                    resultDisplay.textContent = resultDisplay.textContent.slice(0, -3);
+                    break;
+                
+                case ".":
+                    resultDisplay.textContent = resultDisplay.textContent.slice(0, -1);
+                    decimalSymboltrigger = false;
+                    break;
+                
+                default:
+                    resultDisplay.textContent = resultDisplay.textContent.slice(0, -1);
+                    
             }
-            else{
-                resultDisplay.textContent = resultDisplay.textContent.slice(0, -1);
+        });
+
+        decimalButton.addEventListener('click', () => {
+            if(decimalSymboltrigger === false){
+                resultDisplay.textContent += decimalButton.textContent;
+                decimalSymboltrigger = true
             }
             
         });
