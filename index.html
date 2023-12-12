@@ -8,25 +8,46 @@
 </head>
 <body>
 
-    <button class="numberButton">0</button>
-    <button class="numberButton">1</button>
-    <button class="numberButton">2</button>
-    <button class="numberButton">3</button>
-    <button class="numberButton">4</button>
-    <button class="numberButton">5</button>
-    <button class="numberButton">6</button>
-    <button class="numberButton">7</button>
-    <button class="numberButton">8</button>
-    <button class="numberButton">9</button>
-    <button class="decimalButton">.</button>
-    <button class="operationSymbol">+</button>
-    <button class="operationSymbol">-</button>
-    <button class="operationSymbol">*</button>
-    <button class="operationSymbol">/</button>
-    <button class="equals">=</button>
-    <button class="clearButton">Clear</button>
-    <button class="undoButton">Undo</button>
-    <div class="resultDisplay"></div>
+    <div class="calculatorContainer">
+        <div class="heading">Simple Calculator!</div>
+
+        <div class="resultDisplay"></div>
+
+        <div class="calculatorLines">
+            <button class="numberButton">7</button>
+            <button class="numberButton">8</button>
+            <button class="numberButton">9</button>
+            <button class="equals specialButton">=</button>
+        </div>
+        <div class="calculatorLines">
+            <button class="numberButton">4</button>
+            <button class="numberButton">5</button>
+            <button class="numberButton">6</button>
+            <button class="operationSymbol">/</button>
+        </div>
+        <div class="calculatorLines">
+            <button class="numberButton">1</button>
+            <button class="numberButton">2</button>
+            <button class="numberButton">3</button>
+            <button class="operationSymbol">*</button>
+            <button class="undoButton specialButton">Undo</button>
+        </div>
+        <div class="calculatorLines">
+            <button class="numberButton">0</button>
+            <button class="decimalButton">.</button>
+            <button class="operationSymbol">+</button>
+            <button class="operationSymbol">-</button>
+            <button class="clearButton specialButton">Clear</button>
+        </div>
+        
+        
+        
+      
+        
+        
+        
+    
+    </div>
     
 
     
@@ -91,6 +112,7 @@
             switch(resultDisplay.textContent.slice(-1)){
                 case " ":
                     resultDisplay.textContent = resultDisplay.textContent.slice(0, -3);
+                    operationSymbol = undefined;
                     break;
                 
                 case ".":
